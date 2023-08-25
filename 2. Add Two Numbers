@@ -1,0 +1,124 @@
+# https://stackabuse.com/python-linked-lists/
+# https://www.techiedelight.com/ru/linked-list-implementation-python/
+
+"""
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+"""
+
+from typing import Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+# Функция для печати заданного связанного списка
+def printList(head):
+    ptr = head
+    while ptr is not None:
+        print(ptr.val, end=' —> ')
+        ptr = ptr.next
+
+    print('None')
+
+def construct(keys):
+    head = None
+
+    # начать с конца списка
+    for i in reversed(range(len(keys))):
+        # выделяет новый узел в куче и устанавливает его данные
+        head = ListNode(keys[i], head)
+
+    return head
+
+
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        if l1 is None:
+            return None
+
+
+
+
+if __name__ == "__main__":
+    l1 = [2,4,3]
+    l2 = [5,6,4]
+
+    list1 = construct(l1)
+    printList(list1)
+    list2 = construct(l2)
+    printList(list2)
+    print("-----------")
+    # ========================== ListNote to int
+    # ------------- list1
+    prev = None
+    cur = list1
+    while cur:
+        next = cur.next
+        cur.next = prev
+        prev = cur
+        cur = next
+    printList(prev)
+    # ------------- to int
+    list_int1 = ""
+    cur_node = prev
+    count = 0
+    while cur_node != None:
+        list_int1 = list_int1 + str(cur_node.val)
+        count += 1
+        cur_node = cur_node.next
+    print(count)
+    list_int1 = int(list_int1)
+    print("list_int1 = ", list_int1)
+    # ------------- list2
+    prev = None
+    cur = list2
+    while cur:
+        next = cur.next
+        cur.next = prev
+        prev = cur
+        cur = next
+    printList(prev)
+    # ------------- to int
+    list_int2 = ""
+    cur_node = prev
+    count = 0
+    while cur_node != None:
+        list_int2 = list_int2 + str(cur_node.val)
+        count += 1
+        cur_node = cur_node.next
+    print(count)
+    list_int2 = int(list_int2)
+    print("list_int2 = ",list_int2)
+    # -------------
+    # ========================== ListNote to int END
+    # -------------int to list
+    list_int_res = list_int1 + list_int2
+
+    x_list_r_s = []
+    # x_list_r_s = ", ".join(str(e) for e in str(str1))
+
+    x_list_r_s = list(map(int, str(list_int_res)))
+    print('x_list_r_s = ', x_list_r_s)
+    # -------------int to list end
+    print("return")
+    list_ret = construct(x_list_r_s)
+
+    printList(list_ret)
+    prev = None
+
+    cur = list_ret
+    while cur:
+        next = cur.next
+        cur.next = prev
+        prev = cur
+        cur = next
+    printList(prev)
+
+    # a = Solution()
+    # a = a.addTwoNumbers(l1, l2)
+    # print(a)
