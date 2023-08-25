@@ -1,0 +1,90 @@
+# Definition for singly-linked list.
+from typing import Optional
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def printList(head):
+    ptr = head
+    while ptr is not None:
+        print(ptr.val, end=' —> ')
+        ptr = ptr.next
+
+    print('None')
+
+def construct(keys):
+    head = None
+
+    # начать с конца списка
+    for i in reversed(range(len(keys))):
+        # выделяет новый узел в куче и устанавливает его данные
+        head = ListNode(keys[i], head)
+
+    return head
+
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        if head.next is None:
+            return None
+        fast, slow = head, head
+        for i in range(n):
+            fast = fast.next
+        if not fast:
+            return head.next
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+        if n == 1:
+            slow.next = None
+        else:
+            slow.next = slow.next.next
+        return head
+
+        # -------------- remove END
+
+
+if __name__ == "__main__":
+    head = [3,7,9,3,5,8,0]
+    n = 5
+
+    list1 = construct(head)
+    printList(list1)
+    ansv = Solution()
+    ansv = ansv.removeNthFromEnd(list1, n)
+    print("return")
+    printList(ansv)
+
+    #--------------- count
+    ptr = list1
+    count = 0
+    while ptr is not None:
+        count += 1
+        ptr = ptr.next
+    # -------------- remove
+    predNode = None
+    head = list1
+    print("count = ", count)
+    # target = count - n +1
+    target = n
+    print("target = ", target)
+
+    while head is not None and head.val == target:
+        head = head.next
+        print("-----")
+    cur = head
+
+    while cur.next is not None:
+        if cur.next.val == target:
+
+            cur.next = cur.next.next
+        else:
+            cur = cur.next
+    # return head
+
+
+    # -------------- remove END
+
+    printList(head)
