@@ -1,0 +1,27 @@
+"""
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal
+substring
+ consisting of non-space characters only.
+"""
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        s1 = s.rstrip()
+        st = s1.split(' ')
+        # print(st)
+        l = len(st)
+        return len(st[l-1])
+        # print(l)
+        # print(len(st[l-1]))
+
+if __name__ == "__main__":
+    s = "Hello World"
+
+    a = Solution()
+    a = a.lengthOfLastWord(s)
+    print('ans = ',a)
+
+    assert Solution().lengthOfLastWord("   fly me   to   the moon  ") == 4
+    assert Solution().lengthOfLastWord("luffy is still joyboy") == 6
