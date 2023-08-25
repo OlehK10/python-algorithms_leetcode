@@ -1,0 +1,39 @@
+"""
+Given two binary strings a and b, return their sum as a binary string.
+"""
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        a = list(map(int, str(a)))
+        b = list(map(int, str(b)))
+        c_max = max(len(a), len(b))
+        a.reverse()
+        b.reverse()
+        a += [0] * (c_max - len(a))
+        b += [0] * (c_max - len(b))
+
+        overflow = 0
+        res = []
+        for obj in zip(a, b):
+            value = obj[0] + obj[1] + overflow
+            overflow = value // 2
+            res.append(value % 2)
+
+        if overflow == 1:
+            res.append(1)
+
+        # перевернуть число назад
+        res = res[::-1]
+        return ''.join(map(str, res))
+        # print('c = ', c)
+
+
+
+if __name__ == "__main__":
+    a = "1010"
+    b = "1011"
+
+    a1 = Solution()
+    a1 = a1.addBinary(a, b)
+    print('ans = ',a1)
+    assert Solution().addBinary("11", "1") == "100"
