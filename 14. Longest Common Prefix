@@ -1,0 +1,55 @@
+"""
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+"""
+
+from typing import List
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        ans = ""
+        if len(strs)==1:
+            return ''.join(str(e) for e in strs)
+        elif [i for i in strs if i == ""]:
+            return ans
+        else:
+            l = len(min(strs))
+            for i1 in range(l):
+
+                c = 0
+                for index, i in enumerate(strs):
+                     if strs[0][i1] == strs[index][i1]:
+                         c +=1
+                if c == len(strs):
+                     ans = ans + strs[index][i1]
+                else:
+                     break
+                     ans = ""
+            return ans
+
+
+
+
+
+
+
+    def longestCommonPrefix2(self, strs: List[str]) -> str:
+        ans = ""
+        print(len(strs))
+        if len(strs) == 1:
+            return ''.join(str(e) for e in strs)
+        elif [i for i in strs if i==""]:
+            return   ans
+        else:
+            print(len(min(strs)))
+
+if __name__ == "__main__":
+    strs = ["ab", "a"]
+
+    a = Solution()
+    a = a.longestCommonPrefix(strs)
+    print('ans = ',a)
+
+    assert Solution().longestCommonPrefix(["flower","flow","flight"]) == "fl"
+    assert Solution().longestCommonPrefix(["dog","racecar","car"]) == ""
