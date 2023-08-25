@@ -1,0 +1,32 @@
+"""
+Given an integer x, return true if x is a
+palindrome
+, and false otherwise.
+
+
+"""
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x>=0 :
+            x_list = [int(x) for x in str(x)]
+            x_list_r = [str(integer) for integer in x_list[::-1]]
+            x_list_r_s = "".join(x_list_r)
+            x_r = int(x_list_r_s)
+            print('res = ', x_r)
+            if x == x_r:
+                return True
+            else: False
+        else: False
+
+
+if __name__ == "__main__":
+    x = 10
+    target = 0
+    a = Solution()
+    a = a.isPalindrome(x)
+    print(a)
+
+    assert Solution().isPalindrome(121) == True
+    assert Solution().isPalindrome(-121) == None
+    assert Solution().isPalindrome(10) == None
